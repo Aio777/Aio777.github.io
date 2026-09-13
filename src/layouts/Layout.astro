@@ -1,0 +1,62 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '@fontsource-variable/manrope';
+import '@fontsource/ibm-plex-mono/400.css';
+import '../styles/global.css';
+import Mark from '../components/Mark.astro';
+import Arrow from '../components/Arrow.astro';
+interface Props { title?: string; description?: string }
+const { title = 'Aryan Lokesh — Software Engineer', description = 'Portfolio of Aryan Lokesh: software engineering, applied machine learning, GPU computing and numerical systems.' } = Astro.props;
+const path = Astro.url.pathname;
+const canonical = new URL(path, Astro.site);
+---
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content={description}/>
+    <meta name="theme-color" content="#10100f"/>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+    <link rel="canonical" href={canonical}/>
+    <meta property="og:title" content={title}/>
+    <meta property="og:description" content={description}/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content={canonical}/>
+    <title>{title}</title>
+    <script is:inline>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('portfolio-theme') || 'dark';
+        document.documentElement.dataset.motion = localStorage.getItem('portfolio-motion') || 'system';
+      } catch {}
+    </script>
+    <ClientRouter fallback="swap"/>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="reading-progress" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="brand" aria-label="Aryan Lokesh home"><Mark/><span>Aryan Lokesh<span class="brand-period">.</span></span></a>
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="/work/" aria-current={path.startsWith('/work') ? 'page' : undefined}>Work</a>
+          <a href="/about/" aria-current={path.startsWith('/about') ? 'page' : undefined}>About</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+          <button class="icon-button theme-button" aria-label="Switch to light theme" title="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" stroke="currentColor" stroke-width="1.5"/></svg></button>
+          <a class="header-cv" href="/cv/">View CV <Arrow diagonal/></a>
+          <button class="menu-toggle icon-button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation"><span></span><span></span></button>
+        </div>
+      </div>
+      <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden><a href="/work/">Work</a><a href="/about/">About</a><a href="/#contact">Contact</a><a href="/cv/">View CV</a></nav>
+    </header>
+    <main id="main"><slot/></main>
+    <footer class="site-footer">
+      <div class="container footer-inner"><a href="/" class="footer-brand"><Mark/>Aryan Lokesh</a><p>© {new Date().getFullYear()} · Software / ML / systems.</p><button class="motion-toggle" aria-pressed="false">Motion: full</button><a href="#main" class="back-top">Back to top ↑</a></div>
+    </footer>
+    <script>
+      import '../lib/motion';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects';
+---
+<Layout title="Projects — Aryan Lokesh" description="Six projects across Android, Rails, applied machine learning, GPU computing, speech technology and numerical systems.">
+  <div class="container">
+    <section class="page-heading"><p class="eyebrow" data-reveal>PROJECT INDEX / 2024–2026</p><h1 data-reveal>Selected<br/><span class="accent-text">projects.</span></h1><p data-reveal>Android, Rails, audio ML, GPU computing, speech technology and numerical pricing.</p></section>
+    <div class="work-toolbar"><div class="filters" role="group" aria-label="Filter projects">{['All work','Software','Applied AI','Systems'].map((category,index) => <button class="filter-button" data-filter={index === 0 ? 'all' : category} aria-pressed={index === 0}>{category}</button>)}</div><span class="mono filter-count" aria-live="polite">06 PROJECTS</span></div>
+    <div class="project-grid work-grid">{projects.map(project => <ProjectCard project={project}/>)}</div>
+    <div class="work-closing"><p>One-page CV</p><a href="/cv/" class="text-link">View CV ↗</a></div>
+  </div>
+</Layout>

@@ -1,0 +1,20 @@
+---
+import type { Project } from '../data/projects';
+import ProjectArt from './ProjectArt.astro';
+import Arrow from './Arrow.astro';
+interface Props { project: Project }
+const { project } = Astro.props;
+---
+<article class="project-card" data-reveal data-project-category={project.category}>
+  <a href={`/work/${project.slug}/`} class="project-card-link" aria-label={`${project.subtitle}: ${project.title}`}>
+    <div class="project-card-image" transition:name={`art-${project.slug}`}><ProjectArt slug={project.slug}/><span class="project-open"><Arrow diagonal/></span></div>
+    <div class="project-card-meta mono"><span>{project.number} / {project.category}</span><span>{project.period}</span></div>
+    <h3 transition:name={`title-${project.slug}`}>{project.title}</h3>
+    <p class="project-subtitle">{project.subtitle}</p>
+    <p class="project-description">{project.description}</p>
+    <div class="project-card-facts">
+      <div><span class="mono">ROLE</span><span>{project.role}</span></div>
+      <div><span class="mono">TOOLS</span><span>{project.technologies.join(' · ')}</span></div>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,31 @@
+---
+const projectPoint = (theta: number, phi: number) => {
+  const radius = 118 + 43 * Math.cos(phi);
+  const positionX = radius * Math.cos(theta);
+  const positionY = radius * Math.sin(theta);
+  const positionZ = 43 * Math.sin(phi);
+  const rotatedY = positionY * 0.47 - positionZ * 0.883;
+  const rotatedZ = positionY * 0.883 + positionZ * 0.47;
+  const perspective = 550 / (550 - rotatedZ);
+  return [250 + (positionX * 0.94 - rotatedY * 0.34) * perspective, 240 + (positionX * 0.34 + rotatedY * 0.94) * perspective];
+};
+const curves = Array.from({ length: 28 }, (_, ring) => Array.from({ length: 121 }, (_, point) => {
+  const [positionX, positionY] = projectPoint(point / 120 * Math.PI * 2, ring / 28 * Math.PI * 2);
+  return `${point === 0 ? 'M' : 'L'}${positionX.toFixed(2)},${positionY.toFixed(2)}`;
+}).join(' '));
+const crossCurves = Array.from({ length: 36 }, (_, ring) => Array.from({ length: 61 }, (_, point) => {
+  const [positionX, positionY] = projectPoint(ring / 36 * Math.PI * 2, point / 60 * Math.PI * 2);
+  return `${point === 0 ? 'M' : 'L'}${positionX.toFixed(2)},${positionY.toFixed(2)}`;
+}).join(' '));
+---
+<div class="orbital" data-orbital>
+  <div class="orbital-coordinate mono">FIG. 001 <span>PARAMETRIC FORM</span></div>
+  <svg viewBox="0 0 500 480" role="img" aria-label="An orange wireframe torus, a parametric geometry study">
+    <defs><radialGradient id="orb-glow"><stop stop-color="#ff6523" stop-opacity=".11"/><stop offset="1" stop-color="#ff6523" stop-opacity="0"/></radialGradient></defs>
+    <circle cx="250" cy="240" r="240" fill="url(#orb-glow)"/>
+    <g class="orbital-guides" fill="none" stroke="currentColor"><path d="M250 20v440M20 240h460"/><circle cx="250" cy="240" r="204" stroke-dasharray="2 8"/><path d="M30 50V30h20M450 30h20v20M30 430v20h20M450 450h20v-20"/></g>
+    <g class="orbital-wire" fill="none" stroke="var(--accent)" stroke-width=".7">{curves.map(path => <path d={path}/>)}{crossCurves.map(path => <path d={path} opacity=".65"/>)}</g>
+    <g fill="var(--accent)"><circle cx="250" cy="36" r="3"/><circle cx="454" cy="240" r="3"/><circle cx="46" cy="240" r="3"/></g>
+  </svg>
+  <div class="orbital-caption mono"><span>MATHEMATICS → FORM</span><span aria-hidden="true">x / y / z</span></div>
+</div>
