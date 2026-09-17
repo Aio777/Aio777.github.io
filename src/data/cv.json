@@ -1,0 +1,109 @@
+{
+  "name": "Aryan Lokesh",
+  "title": "Graduate Software and AI Engineer",
+  "location": "United Kingdom",
+  "updated": "September 2026",
+  "contacts": [
+    {
+      "label": "aryanlokesh.me",
+      "url": "https://aryanlokesh.me/"
+    },
+    {
+      "label": "aryan.lokesh4@gmail.com",
+      "url": "mailto:aryan.lokesh4@gmail.com"
+    },
+    {
+      "label": "07833806683",
+      "url": "tel:+447833806683"
+    },
+    {
+      "label": "linkedin.com/in/aryan-l-4516562b4",
+      "url": "https://www.linkedin.com/in/aryan-l-4516562b4/"
+    },
+    {
+      "label": "github.com/Aio777",
+      "url": "https://github.com/Aio777"
+    }
+  ],
+  "profile": "MComp Computer Science with Artificial Intelligence graduate with project experience in Android development, Rails applications, audio machine learning, GPU programming and numerical computing. UK Graduate visa holder.",
+  "education": {
+    "institution": "University of Sheffield",
+    "degree": "MComp Computer Science with Artificial Intelligence",
+    "period": "2022-2026",
+    "qualification": "Four-year integrated master's, 2:1",
+    "results": "Final-year average: 70.1%. Selected results: Parallel Computing with GPUs 79; Darwin Project 75; Speech Technology 74.",
+    "earlier": "Cambridge International A Levels (June 2021): Information Technology A*, Mathematics A, Chemistry B, Physics B; English Language B (AS Level)."
+  },
+  "skills": [
+    {
+      "label": "Languages",
+      "text": "Python, C/C++, Kotlin, Ruby, SQL"
+    },
+    {
+      "label": "Frameworks and tools",
+      "text": "PyTorch, Ruby on Rails, PostgreSQL, CUDA/OpenMP, Jetpack Compose, Room, NumPy/CuPy, SciPy, Git, Linux"
+    }
+  ],
+  "projects": [
+    {
+      "slug": "productiv",
+      "name": "Productiv - Rails Productivity Platform",
+      "period": "2025-2026",
+      "context": "Ruby on Rails 8, PostgreSQL | Genesys team project",
+      "bullets": [
+        "Year 4 team project: a productivity platform with personal/shared tasks, team projects, Pomodoro, notifications, gamification and role-based analytics.",
+        "The team codebase includes RSpec/Capybara tests, performance examples and CI configuration for testing, security and linting."
+      ]
+    },
+    {
+      "slug": "recola",
+      "name": "ReCoLA - Android Property Management",
+      "period": "2025",
+      "context": "Kotlin, Jetpack Compose, Room, Google Maps | Six-person team",
+      "bullets": [
+        "Implemented property creation, viewing, editing and deletion, maps/geocoding, proximity sorting, supplier assignment, internal image handling and related tests.",
+        "Connected Compose screens to Room persistence and map/list navigation, with alphabetical sorting when live location was unavailable."
+      ]
+    },
+    {
+      "slug": "tb-screening",
+      "name": "TB-Turing / HeAR - Audio-Based TB Screening Research",
+      "period": "2025-2026",
+      "context": "Python, PyTorch, Google HeAR, HPC | HeAR workstream within team research",
+      "bullets": [
+        "Developed patient-level multiple-instance learning over frozen HeAR cough embeddings, with grouped five-fold cross-validation, sensitivity-targeted thresholds and bootstrap analysis.",
+        "The DS2 symptom-assisted configuration reached 0.830 AUROC in retrospective internal cross-validation; this was screening research, not clinical validation."
+      ]
+    },
+    {
+      "slug": "parallel-computing",
+      "name": "Parallel Computing with OpenMP and CUDA",
+      "period": "2026",
+      "context": "C/C++, CUDA, OpenMP, Nsight | Individual coursework",
+      "bullets": [
+        "Implemented and optimised Count Gliders, Histogram and Emboss in OpenMP and CUDA against supplied serial CPU references.",
+        "Checked correctness and profiled execution with Nsight; compared end-to-end timings including allocation, host-device transfers, kernel execution and cleanup."
+      ]
+    },
+    {
+      "slug": "heston",
+      "name": "Heston Option Pricing and Calibration",
+      "period": "2024-2025",
+      "context": "Python, NumPy/CuPy, PyTorch, SciPy | Individual dissertation",
+      "bullets": [
+        "Implemented CPU COS pricing, batched CuPy GPU pricing and bounded L-BFGS-B calibration of the Heston stochastic-volatility model to filtered SPX option contracts.",
+        "Trained a ten-feature PyTorch surrogate on 600,000 synthetic samples and compared calibration runtime and pricing error across CPU, GPU and surrogate paths."
+      ]
+    },
+    {
+      "slug": "speech-technology",
+      "name": "Speech Technology - Neural VAD and GMM Modelling",
+      "period": "2026",
+      "context": "Python, PyTorch, scikit-learn | Individual coursework",
+      "bullets": [
+        "Compared MLP, recurrent and temporal-convolutional voice-activity detectors; the selected TCN achieved 7.73% EER over 495,486 cross-corpus test frames.",
+        "Separately implemented Gaussian mixture models for vowel classification and closed-set speaker identification, comparing mixture complexity and utterance-level decisions."
+      ]
+    }
+  ]
+}

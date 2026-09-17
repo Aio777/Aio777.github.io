@@ -1,11 +1,52 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Arrow from '../components/Arrow.astro';
-import { projects } from '../data/projects';
+import cv from '../data/cv.json';
 ---
-<Layout title="CV — Aryan Lokesh" description="Aryan Lokesh’s CV: education, software and AI projects, technical skills and contact details.">
+<Layout title="CV — Aryan Lokesh" description="Read Aryan Lokesh’s CV online: education, technical skills and six university projects. PDF download is optional.">
   <div class="container cv-container">
-    <section class="page-heading"><p class="eyebrow" data-reveal>CURRICULUM VITAE</p><h1 data-reveal>Education, projects,<br/><span class="accent-text">technical skills.</span></h1><div class="cv-download" data-reveal><a class="button button-primary" href="/cv/aryan-lokesh-cv.pdf" download data-astro-reload>Download CV <span aria-hidden="true">↓</span></a><span class="mono muted">PDF · ONE PAGE</span></div></section>
-    <div class="cv-sheet"><header><h2>Aryan Lokesh</h2><p>Graduate Software & AI Engineer · United Kingdom</p><div class="cv-contact"><a href="mailto:aryan.lokesh4@gmail.com">Email ↗</a><a href="https://github.com/Aio777" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/aryan-l-4516562b4/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></header><section><h3>Education</h3><strong>University of Sheffield · 2022–2026</strong><p>MComp Computer Science with Artificial Intelligence — four-year integrated master’s, 2:1.<br/>Final-year average: 70.1%.</p></section><section><h3>Selected projects</h3><div class="cv-projects">{projects.map(project => <a href={`/work/${project.slug}/`}><div><strong>{project.subtitle}</strong><span>{project.role}</span><p>{project.description}</p></div><Arrow diagonal/></a>)}</div></section><section><h3>Technical skills</h3><p>Python · C/C++ · Kotlin · Ruby · SQL<br/>PyTorch · Rails · PostgreSQL · CUDA / OpenMP · Jetpack Compose · Git · Linux</p></section></div>
+    <section class="page-heading cv-page-heading">
+      <p class="eyebrow" data-reveal>CURRICULUM VITAE</p>
+      <h1 data-reveal>View <span class="accent-text">CV.</span></h1>
+      <p data-reveal>Read my CV below, or download the one-page PDF.</p>
+      <div class="cv-download" data-reveal>
+        <a class="button button-outline" href="/cv/aryan-lokesh-cv.pdf" download data-astro-reload>Download PDF <span aria-hidden="true">↓</span></a>
+        <a class="text-link" href="/cv/aryan-lokesh-cv.pdf" target="_blank" rel="noopener noreferrer" data-astro-reload>Open PDF in browser <Arrow diagonal/></a>
+        <span class="mono muted">Updated {cv.updated}</span>
+      </div>
+    </section>
+    <article class="cv-sheet" aria-label="Aryan Lokesh CV">
+      <header>
+        <h2>{cv.name}</h2>
+        <p>{cv.title} · {cv.location}</p>
+        <div class="cv-contact">{cv.contacts.map(contact => <a href={contact.url}>{contact.label}</a>)}</div>
+      </header>
+      <section aria-labelledby="cv-profile">
+        <h3 id="cv-profile">Profile</h3>
+        <p>{cv.profile}</p>
+      </section>
+      <section aria-labelledby="cv-education">
+        <h3 id="cv-education">Education</h3>
+        <strong>{cv.education.institution} · {cv.education.period}</strong>
+        <p>{cv.education.degree}<br/>{cv.education.qualification}</p>
+        <p>{cv.education.results}</p>
+        <p>{cv.education.earlier}</p>
+      </section>
+      <section aria-labelledby="cv-skills">
+        <h3 id="cv-skills">Technical skills</h3>
+        {cv.skills.map(skill => <p><strong>{skill.label}:</strong> {skill.text}</p>)}
+      </section>
+      <section aria-labelledby="cv-projects">
+        <h3 id="cv-projects">Selected university projects</h3>
+        <div class="cv-project-details">
+          {cv.projects.map(project => <section class="cv-project">
+            <div class="cv-project-heading"><h4><a href={`/work/${project.slug}/`}>{project.name}</a></h4><span class="mono">{project.period}</span></div>
+            <p class="cv-project-context">{project.context}</p>
+            <ul>{project.bullets.map(bullet => <li>{bullet}</li>)}</ul>
+            <a class="text-link cv-case-link" href={`/work/${project.slug}/`}>Project details <Arrow/></a>
+          </section>)}
+        </div>
+      </section>
+    </article>
   </div>
 </Layout>

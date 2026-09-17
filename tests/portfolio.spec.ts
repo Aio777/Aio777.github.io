@@ -116,3 +116,23 @@ test('key pages pass automated accessibility checks in both themes', async ({ pa
     }
   }
 });
+
+test('CV can be read without downloading a file or enabling JavaScript', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  const downloads: string[] = [];
+  page.on('download', download => downloads.push(download.suggestedFilename()));
+  await page.goto('http://127.0.0.1:4321/');
+  await page.locator('.hero-ctas').getByRole('link', { name: 'View CV' }).click();
+  await expect(page).toHaveURL(/\/cv\/$/);
+  const cv = page.getByRole('article', { name: 'Aryan Lokesh CV' });
+  await expect(cv).toBeVisible();
+  await expect(cv.getByRole('heading', { name: 'Profile', exact: true })).toBeVisible();
+  await expect(cv.locator('.cv-project')).toHaveCount(6);
+  await expect(cv.locator('.cv-project li')).toHaveCount(12);
+  await expect(cv.getByRole('link', { name: 'aryanlokesh.me', exact: true })).toHaveAttribute('href', 'https://aryanlokesh.me/');
+  await expect(page.getByRole('link', { name: 'Download PDF', exact: false })).toHaveAttribute('download', '');
+  await expect(page.getByRole('link', { name: 'Open PDF in browser' })).not.toHaveAttribute('download');
+  expect(downloads).toEqual([]);
+  await context.close();
+});
