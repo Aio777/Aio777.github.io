@@ -61,7 +61,7 @@ test('site copy avoids generic slogans on the main pages', async ({ page }) => {
     expect(copy).not.toContain('I measure it too.');
   }
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'Software engineer. Applications, models, systems.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Aryan Lokesh.' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Contact.' })).toBeVisible();
 });
 
@@ -97,9 +97,12 @@ test('mobile navigation and page widths work', async ({ page }) => {
   await expect(page.getByRole('navigation', { name: 'Mobile navigation' })).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(page.getByRole('navigation', { name: 'Mobile navigation' })).toBeHidden();
-  for (const route of ['/', '/work/', '/about/', '/cv/', '/work/parallel-computing/', '/work/tb-screening/']) {
-    await page.goto(route);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
+  for (const width of [390, 768]) {
+    await page.setViewportSize({ width, height: 844 });
+    for (const route of ['/', '/work/', '/about/', '/cv/', '/work/parallel-computing/', '/work/tb-screening/']) {
+      await page.goto(route);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${route} at ${width}px`).toBeTruthy();
+    }
   }
 });
 
